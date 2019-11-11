@@ -3,7 +3,7 @@ import Vuex from 'vuex';
 import axios from 'axios';
 import Swal from 'sweetalert2';
 
-const url = 'http://localhost:3000';
+const url = 'http://35.234.205.110';
 Vue.use(Vuex);
 
 export default new Vuex.Store({

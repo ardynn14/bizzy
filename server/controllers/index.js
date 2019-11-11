@@ -30,7 +30,7 @@ class UserControllers {
         User.findById({ _id })
             .then(user => {
                 if (user) {
-                    res.status(200).json(user);
+                    res.status(200).json({ status: true, ...user._doc });
                 } else {
                     res.status(404).json({ id: _id, message: `User not found`, status: false });
                 }
@@ -49,19 +49,28 @@ class UserControllers {
                 .then(user => {
                     if (user) {
                         if (user._id == _id) {
-                            return User.findByIdAndUpdate(_id, data, { new: true })
+                            User.findByIdAndUpdate({ _id }, data, { new: true })
+                                .then(user => {
+                                    if (user) {
+                                        res.status(200).json({ status: true, ...user._doc });
+                                    } else {
+                                        res.status(404).json({ id: _id, message: `User not found`, status: false });
+                                    }
+                                })
+                                .catch(next);
                         } else {
                             res.status(409).json({ email: data.email, message: `Email has already been used`, status: false });
                         }
                     } else {
-                        res.status(404).json({ id: _id, message: `User not found`, status: false });
-                    }
-                })
-                .then(user => {
-                    if (user) {
-                        res.status(200).json({ status: true, ...user._doc });
-                    } else {
-                        res.status(404).json({ id: _id, message: `User not found`, status: false });
+                        User.findByIdAndUpdate({ _id }, data, { new: true })
+                            .then(user => {
+                                if (user) {
+                                    res.status(200).json({ status: true, ...user._doc });
+                                } else {
+                                    res.status(404).json({ id: _id, message: `User not found`, status: false });
+                                }
+                            })
+                            .catch(next);
                     }
                 })
                 .catch(next);
@@ -76,7 +85,7 @@ class UserControllers {
         User.findByIdAndDelete({ _id })
             .then(user => {
                 if (user) {
-                    res.status(200).json(user);
+                    res.status(200).json({ status: true, ...user._doc });
                 } else {
                     res.status(404).json({ id: _id, message: `User not found`, status: false });
                 }

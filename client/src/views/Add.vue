@@ -28,7 +28,7 @@
 import axios from 'axios';
 import Swal from 'sweetalert2';
 
-const url = 'http://localhost:3000/users';
+const url = 'http://35.234.205.110/users';
 
 export default {
   data() {

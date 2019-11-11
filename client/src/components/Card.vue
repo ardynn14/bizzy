@@ -1,5 +1,5 @@
 <template>
-  <div class="p-1 col-12 col-sm-12 col-md-6 col-lg-6 col-xl-4">
+  <div class="p-3 col-12 col-sm-12 col-md-6 col-lg-6 col-xl-4">
     <div class="user-card d-flex flex-column">
       <h6 class="mt-3">User info</h6>
       <hr class="mb-0" style="width: 90%; border: 0.5px solid #2c3e50;" />
@@ -31,7 +31,7 @@
 import axios from 'axios';
 import Swal from 'sweetalert2';
 
-const url = 'http://localhost:3000/users';
+const url = 'http://35.234.205.110/users';
 
 export default {
   props: ['user'],
